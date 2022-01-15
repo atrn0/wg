@@ -1,0 +1,25 @@
+version: '3'
+services:
+  wg:
+    container_name: wireguard
+    image: linuxserver/wireguard
+    restart: always
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - SERVERURL=auto
+      - PEERS=laptop,tablet,phone
+      - PEERDNS=auto
+    volumes:
+      - "/home/atrn0/wireguard_config:/config"
+      - /lib/modules:/lib/modules
+    networks:
+      - microservices
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+networks:
+  microservices:
+    external: true
