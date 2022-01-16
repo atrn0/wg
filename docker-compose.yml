@@ -10,9 +10,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - SERVERURL=auto
+      - SERVERURL=wg.ataran.me
       - PEERS=laptop,tablet,phone
       - PEERDNS=auto
+      - SERVERPORT=51820
     volumes:
       - "/home/atrn0/wireguard_config:/config"
       - /lib/modules:/lib/modules
@@ -20,6 +21,8 @@ services:
       - microservices
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+    ports:
+      - "5182:51820/udp"
 networks:
   microservices:
     external: true
