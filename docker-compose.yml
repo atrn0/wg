@@ -13,16 +13,16 @@ services:
       - SERVERURL=wg.ataran.me
       - PEERS=laptop,tablet,phone
       - PEERDNS=auto
-      - SERVERPORT=51820
+      - SERVERPORT=5182
     volumes:
       - "/home/atrn0/wireguard_config:/config"
       - /lib/modules:/lib/modules
-    networks:
-      - microservices
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     ports:
       - "5182:51820/udp"
+    networks:
+      wg6:
 networks:
-  microservices:
+  wg6:
     external: true
